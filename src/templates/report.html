@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+}
+</style>
+<body>
+
+<h2>Drivers:</h2>
+<div style="display: flex;height: 22px;border-bottom-style: solid;border-left-width: 0px;border-left-style: solid;border-right-style: solid;border-top-width: 0px;border-top-style: solid;border-bottom-width: 0px;border-right-width: 0px;padding-bottom: 10px;">
+    <form action="#" method="get">
+        <label for="List sorting">List sorting:</label>
+        <select onchange="sort(this)" name="list sorting">
+            <option value="asc">asc</option>
+            <option value="desc">desc</option>
+        </select>
+    </form>
+    <button onclick="window.location.reload()" style="margin-left: 10px;">filter</button>
+
+</div>
+<button onclick="window.location.href='http:/report/drivers'">go to list of drivers</button>
+<table style="width:100%">
+    <tr>
+        <th style="background-color:rgb(183, 182, 182);">Place</th>
+        <th style="background-color:rgb(183, 182, 182);">Abbreviation</th>
+        <th style="background-color:rgb(183, 182, 182);">Driver</th>
+        <th style="background-color:rgb(183, 182, 182);">Car</th>
+        <th style="background-color:rgb(183, 182, 182);">Start time</th>
+        <th style="background-color:rgb(183, 182, 182);">End time</th>
+        <th style="background-color:rgb(183, 182, 182);">Speed</th>
+    </tr>
+    {% for driver in data %}
+<tr>
+    {% if loop.index > 15 %}
+        <td style="background-color:rgb(244, 122, 122);">{{ loop.index }}</td>
+        <td style="background-color:rgb(244, 122, 122);">{{ driver.abbreviation }}</td>
+        <td style="background-color:rgb(244, 122, 122);">{{ driver.driver }}</td>
+        <td style="background-color:rgb(244, 122, 122);">{{ driver.car }}</td>
+        <td style="background-color:rgb(244, 122, 122);">{{ driver.start_time }}</td>
+        <td style="background-color:rgb(244, 122, 122);">{{ driver.end_time }}</td>
+        <td style="background-color:rgb(244, 122, 122);">{{ driver.speed }}</td>
+    {% else %}
+        <td style="background-color:rgb(127, 248, 127);">{{ loop.index }}</td>
+        <td style="background-color:rgb(127, 248, 127);">{{ driver.abbreviation }}</td>
+        <td style="background-color:rgb(127, 248, 127);">{{ driver.driver }}</td>
+        <td style="background-color:rgb(127, 248, 127);">{{ driver.car }}</td>
+        <td style="background-color:rgb(127, 248, 127);">{{ driver.start_time }}</td>
+        <td style="background-color:rgb(127, 248, 127);">{{ driver.end_time }}</td>
+        <td style="background-color:rgb(127, 248, 127);">{{ driver.speed }}</td>
+    {% endif %}
+
+{%endfor%}
+
+</tr>
+</table>
+
+</body>
+<script>
+    function sort(e){
+        window.history.pushState({}, null, 'http:/report?order=' + e.value);
+    }
+</script>
+
+</html>

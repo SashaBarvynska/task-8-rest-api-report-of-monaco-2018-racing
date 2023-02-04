@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+  border-collapse: collapse;
+}
+</style>
+<body>
+
+<h2>Drivers:</h2>
+
+<table style="width:22%">
+    <tr>
+        <th style="background-color:rgb(183, 182, 182);">Driver</th>
+        <th style="background-color:rgb(183, 182, 182);">Abbreviation</th>
+    </tr>
+    {% for driver in data %}
+    <tr>
+        <td>{{ driver.driver }}</td>
+        <td><a href="/report/drivers/{{driver.abbreviation}}" > {{ driver.abbreviation }} </a></td>
+    </tr>
+{%endfor%}
+
+</tr>
+</table>
+</body>
+</html>
