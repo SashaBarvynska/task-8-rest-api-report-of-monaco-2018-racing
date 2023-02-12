@@ -2,9 +2,6 @@ from flask import jsonify, make_response
 from simplexml import dumps
 from task_Barvynska import Driver, Drivers, Files, FormatFile
 
-
-
-
 from config import Config
 
 
@@ -29,9 +26,11 @@ class DriverAdaptor:
         return [driver_object for driver_object in self.list_drivers if getattr(driver_object, key) == value][0]
 
 
-def make_xml_response(list_drivers: list[Driver]):
+def make_xml_response(list: list[Driver]):
     column_names = ["abbreviation", "driver", "car", "start_time", "end_time", 'speed']
-    dict_of_lists = [dict(zip(column_names, (u.abbreviation, u.driver, u.car, u.start_time, u.end_time, u.speed))) for u in list_drivers]
+    dict_of_lists = [
+        dict(zip(column_names, (i.abbreviation, i.driver, i.car, i.start_time, i.end_time, i.speed))) for i in list
+        ]
     response = make_response(dumps({'response': dict_of_lists}), 200)
     response.mimetype = 'application/xml'
     return response
