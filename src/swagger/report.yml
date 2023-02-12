@@ -1,0 +1,16 @@
+parameters:
+  - name: format
+    in: query
+    type: string
+    enum: ['json', 'xml']
+    required: true
+    default: 'json'
+  - name: order
+    in: query
+    type: string
+    enum: ['asc', 'desc']
+    required: false
+    default: 'asc'
+responses:
+  200:
+    description: OK
