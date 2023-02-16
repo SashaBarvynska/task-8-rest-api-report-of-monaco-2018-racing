@@ -2,13 +2,26 @@ parameters:
   - in: path
     name: driver_code
     type: string
-    required: false
+    required: true
   - name: format
     in: query
     type: string
     enum: ['json', 'xml']
-    required: true
     default: 'json'
 responses:
   200:
-    description: OK
+    description: Driver in format json
+    schema:
+      $ref: "#/definitions/Drivers"
+definitions:
+  Drivers:
+    type: object
+    additionalProperties: 
+      type: array
+    example:
+      abbreviation: VBM
+      car: MERCEDES
+      driver: Valtteri Bottas
+      end_time: 12:01:12.434
+      speed: 1:12.434
+      start_time: '12:00:00.000'

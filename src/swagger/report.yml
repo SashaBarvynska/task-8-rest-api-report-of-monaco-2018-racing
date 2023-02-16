@@ -3,7 +3,7 @@ parameters:
     in: query
     type: string
     enum: ['json', 'xml']
-    required: true
+    required: false
     default: 'json'
   - name: order
     in: query
@@ -13,4 +13,29 @@ parameters:
     default: 'asc'
 responses:
   200:
-    description: OK
+    description: A list of drivers in format json
+    schema:
+      $ref: "#/definitions/report"
+definitions:
+  report:
+    type: object
+    additionalProperties: 
+      type: array
+    example: [
+      {
+        abbreviation: 'VBM', 
+        car: 'MERCEDES', 
+        driver: 'Valtteri Bottas', 
+        end_time: '12:01:12.434', 
+        speed: '1:12.434'
+        }, 
+      {
+        start_time: '12:00:00.000',
+        abbreviation: 'DRR', 
+        car: 'RED BULL RACING TAG HEUER', 
+        driver: 'Daniel Ricciardo', 
+        end_time: '12:11:24.067', 
+        speed: '57:12.013', 
+        start_time: '12:14:12.054'
+        }
+      ]
