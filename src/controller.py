@@ -23,14 +23,25 @@ class DriverAdaptor:
         return Drivers.sort_data(self.list_drivers, order)
 
     def get_driver(self, key: str, value) -> Driver:
-        return [driver_object for driver_object in self.list_drivers if getattr(driver_object, key) == value][0]
+        driver_list = [driver_object for driver_object in self.list_drivers if getattr(driver_object, key) == value]
+        if not len(driver_list):
+            return None
+        return driver_list[0]
 
 
-def make_xml_response(list: list[Driver], code: int) -> wrappers.Response:
+def make_xml_response_report(list: list[Driver], code: int) -> wrappers.Response:
     column_names = ["abbreviation", "driver", "car", "start_time", "end_time", 'speed']
     dict_of_lists = [
         dict(zip(column_names, (i.abbreviation, i.driver, i.car, i.start_time, i.end_time, i.speed))) for i in list
         ]
+    response = make_response(dumps({'response': dict_of_lists}), code)
+    response.mimetype = 'application/xml'
+    return response
+
+
+def make_xml_response_report_drivers(list: list[Driver], code: int) -> wrappers.Response:
+    column_names = ["abbreviation", "driver"]
+    dict_of_lists = [dict(zip(column_names, (i.abbreviation, i.driver))) for i in list]
     response = make_response(dumps({'response': dict_of_lists}), code)
     response.mimetype = 'application/xml'
     return response

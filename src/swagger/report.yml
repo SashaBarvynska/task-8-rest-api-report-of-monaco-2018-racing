@@ -16,6 +16,10 @@ responses:
     description: A list of drivers in format json
     schema:
       $ref: "#/definitions/report"
+  404:
+    description: "Page Not Found"
+    schema:
+      $ref: "#/definitions/error_report"
 definitions:
   report:
     type: object
@@ -30,12 +34,17 @@ definitions:
         speed: '1:12.434'
         }, 
       {
-        start_time: '12:00:00.000',
         abbreviation: 'DRR', 
         car: 'RED BULL RACING TAG HEUER', 
         driver: 'Daniel Ricciardo', 
         end_time: '12:11:24.067', 
         speed: '57:12.013', 
-        start_time: '12:14:12.054'
         }
       ]
+  error_report:
+    type: object
+    additionalProperties: 
+      type: array
+    example:
+      message: Page Not Found,
+      status: 404

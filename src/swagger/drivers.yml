@@ -5,31 +5,41 @@ parameters:
     enum: ['json', 'xml']
     required: false
     default: 'json'
+  - name: order
+    in: query
+    type: string
+    enum: ['asc', 'desc']
+    required: false
+    default: 'asc'
 responses:
   200:
     description: A list of drivers in format json
     schema:
       $ref: "#/definitions/List_drivers"
+  404:
+    description: "Page Not Found"
+    schema:
+      $ref: "#/definitions/error_drivers"
 definitions:
   List_drivers:
     type: object
     additionalProperties: 
       type: array
-    example: [
-      {
-        abbreviation: 'VBM', 
-        car: 'MERCEDES', 
-        driver: 'Valtteri Bottas', 
-        end_time: '12:01:12.434', 
-        speed: '1:12.434'
+    example: 
+      [
+        {
+          abbreviation: VBM, 
+          driver: Valtteri Bottas, 
         }, 
-      {
-        start_time: '12:00:00.000',
-        abbreviation: 'DRR', 
-        car: 'RED BULL RACING TAG HEUER', 
-        driver: 'Daniel Ricciardo', 
-        end_time: '12:11:24.067', 
-        speed: '57:12.013', 
-        start_time: '12:14:12.054'
+        {
+          abbreviation: DRR, 
+          driver: Daniel Ricciardo, 
         }
       ]
+  error_drivers:
+    type: object
+    additionalProperties: 
+      type: array
+    example:
+      message: Page Not Found,
+      status: 404

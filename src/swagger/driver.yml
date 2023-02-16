@@ -13,6 +13,10 @@ responses:
     description: Driver in format json
     schema:
       $ref: "#/definitions/Drivers"
+  404:
+    description: "No such driver"
+    schema:
+      $ref: "#/definitions/error"
 definitions:
   Drivers:
     type: object
@@ -25,3 +29,10 @@ definitions:
       end_time: 12:01:12.434
       speed: 1:12.434
       start_time: '12:00:00.000'
+  error:
+    type: object
+    additionalProperties: 
+      type: array
+    example:
+      message: No such driver,
+      status: 404
