@@ -1,5 +1,9 @@
 import os
 
+from src.app import app
+
+app.json.sort_keys = False
+
 
 class Config:
     FOLDER_FILES = os.environ.get('FOLDER_FILES', 'data_files')
