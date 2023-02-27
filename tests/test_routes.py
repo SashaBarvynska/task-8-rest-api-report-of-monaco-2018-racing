@@ -80,7 +80,7 @@ def test_get_info_error(mock_get_driver, mock_get_drivers, client):
     response: Response = client.get("/report/drivers/DRghfgR?format=json")
     assert response.status_code == 404
     assert response.data == b'{"message":"No such driver"}\n'
-    mock_get_driver.assert_called_with("abbreviation", "DRghfgR".upper())
+    mock_get_driver.assert_called_with("abbreviation", "DRghfgR")
 
 
 def test_wrong_routes(client):

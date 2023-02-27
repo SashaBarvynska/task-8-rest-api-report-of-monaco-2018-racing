@@ -23,7 +23,7 @@ class DriverAdaptor:
         return Drivers.sort_data(self.list_drivers, order)
 
     def get_driver(self, key: str, value) -> Driver or None:
-        driver_list = [driver_object for driver_object in self.list_drivers if getattr(driver_object, key) == value]
+        driver_list = [driver for driver in self.list_drivers if getattr(driver, key).lower() == value.lower()]
         if not len(driver_list):
             return None
         return driver_list[0]
