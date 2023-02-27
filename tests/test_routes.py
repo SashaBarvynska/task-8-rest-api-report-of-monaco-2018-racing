@@ -5,7 +5,8 @@ import pytest
 from flask import Response
 from simplexml import dumps
 
-from tests.constants import create_driver, json_format, sort_list, xml_format
+from tests.test_helpers import (create_driver, json_format, sort_list,
+                                xml_format)
 
 drivers_list_1 = create_driver(2)
 
@@ -79,7 +80,7 @@ def test_get_info_error(mock_get_driver, mock_get_drivers, client):
     response: Response = client.get("/report/drivers/DRghfgR?format=json")
     assert response.status_code == 404
     assert response.data == b'{"message":"No such driver"}\n'
-    mock_get_driver.assert_called_with("abbreviation", "DRghfgR")
+    mock_get_driver.assert_called_with("abbreviation", "DRghfgR".upper())
 
 
 def test_wrong_routes(client):

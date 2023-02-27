@@ -3,7 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from src.controller import DriverAdaptor, get_drivers
-from tests.constants import create_driver
+from tests.test_helpers import create_driver
 
 drivers_list_3 = create_driver(1)
 driver = drivers_list_3[0]
