@@ -1,3 +1,5 @@
+from typing import Any
+
 from flask import jsonify, make_response, wrappers
 from simplexml import dumps
 from task_Barvynska import Driver, Drivers, Files, FormatFile
@@ -29,13 +31,13 @@ class DriverAdaptor:
         return driver_list[0]
 
 
-def make_xml_response(list_drivers: list[Driver], code: int) -> wrappers.Response:
+def make_xml_response(list_drivers: list[dict[str, Any]], code: int) -> wrappers.Response:
     response = make_response(dumps({'response': list_drivers}), code)
     response.mimetype = 'application/xml'
     return response
 
 
-def make_json_response(list_drivers: list[Driver], code: int) -> wrappers.Response:
+def make_json_response(list_drivers: list[dict[str, str]], code: int) -> wrappers.Response:
     response = make_response(jsonify(list_drivers), code)
     response.mimetype = 'application/json'
     return response
